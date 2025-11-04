@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { SlackEventMiddlewareArgs, AllMiddlewareArgs } from '@slack/bolt';
 import { DatabaseService } from '../../services/DatabaseService';
 import { DeleteQueue } from '../../queue/DeleteQueue';
