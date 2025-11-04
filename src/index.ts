@@ -11,7 +11,7 @@ dotenv.config();
 const requiredEnvVars = [
   'SLACK_BOT_TOKEN',
   'SLACK_USER_TOKEN',
-  'SLACK_SIGNING_SECRET',
+  // 'SLACK_SIGNING_SECRET',
   'SLACK_APP_TOKEN',
   'DATABASE_URL',
   'REDIS_URL'
@@ -30,8 +30,7 @@ const redis = new RedisService();
 const deleteQueue = new DeleteQueue(slack);
 const bot = new BotApp(slack, db, redis, deleteQueue, {
   botToken: process.env.SLACK_BOT_TOKEN!,
-  signingSecret: process.env.SLACK_SIGNING_SECRET!,
-  appToken: process.env.SLACK_APP_TOKEN!,
+  appToken: process.env.SLACK_APP_TOKEN!
 });
 
 // Graceful shutdown handling

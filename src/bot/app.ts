@@ -14,9 +14,9 @@ export class BotApp {
     private readonly db: DatabaseService,
     private readonly redis: RedisService,
     private readonly queue: DeleteQueue,
-    tokens: { botToken: string; signingSecret: string; appToken: string },
+    tokens: { botToken: string;  appToken: string },
   ) {
-    this.app = new App({ token: tokens.botToken, signingSecret: tokens.signingSecret, socketMode: true, appToken: tokens.appToken });
+    this.app = new App({ token: tokens.botToken, socketMode: true, appToken: tokens.appToken });
     const spam = new SpamService(this.redis, this.slack);
     registerEventHandlers(this.app, { db: this.db, queue: this.queue, spam });
   }
