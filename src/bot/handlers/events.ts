@@ -9,7 +9,7 @@ export function registerEventHandlers(
 ) {
   app.event('message', async (args: SlackEventMiddlewareArgs<'message'> & AllMiddlewareArgs) => {
     const { event } = args;
-    if (event.subtype) return;
+    // if (event.subtype && event.subtype) return;
     if (!event.user) return;
 
     // Skip bot messages and non-whitelisted channels early
