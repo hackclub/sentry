@@ -18,6 +18,14 @@ export const whitelistedChannels = pgTable('whitelisted_channels', {
   pk: primaryKey({ columns: [table.channelId] }),
 }));
 
+export const allowedThreadsToSpeak = pgTable('allowed_threads_to_speak', {
+  threadTs: text('thread_ts').notNull(),
+  channelId: text('channel_id').notNull(),
+  addedAt: timestamp('added_at').defaultNow().notNull(),
+}, (table) => ({
+  pk: primaryKey({ columns: [table.threadTs, table.channelId] }),
+}));
+
 export const messageQueue = pgTable('message_queue', {
   id: text('id').primaryKey(),
   messageTs: text('message_ts').notNull(),

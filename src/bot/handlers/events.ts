@@ -21,6 +21,18 @@ export function registerEventHandlers(
     const isUserWhitelisted = await deps.db.isUserWhitelisted(event.user);
     if (isUserWhitelisted) return;
 
+    // Check if this is a huddle thread starter (has subtype huddle_thread)
+    if (event.subtype === 'huddle_thread') {
+      await deps.db.addAllowedThreadToSpeak(event.ts, event.channel);
+      return;
+    }
+
+    // Check if message is in an allowed thread
+    if (event.thread_ts) {
+      const isAllowedThread = await deps.db.isThreadAllowedToSpeak(event.thread_ts, event.channel);
+      if (isAllowedThread) return;
+    }
+
     // Spam detection window + kick
     await deps.spam.maybeKickForSpam(event.channel, event.user);
 
