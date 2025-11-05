@@ -4,6 +4,7 @@ import { DatabaseService } from '../services/DatabaseService';
 import { RedisService } from '../services/RedisService';
 import { DeleteQueue } from '../queue/DeleteQueue';
 import { registerEventHandlers } from './handlers/events';
+import { registerActionHandlers } from './handlers/actions';
 import { SpamService } from '../services/SpamService';
 import { logger } from '../utils/logger';
 
@@ -19,6 +20,7 @@ export class BotApp {
     this.app = new App({ token: tokens.botToken, socketMode: true, appToken: tokens.appToken });
     const spam = new SpamService(this.redis, this.slack);
     registerEventHandlers(this.app, { db: this.db, queue: this.queue, spam });
+    registerActionHandlers(this.app, { db: this.db });
   }
 
   async start(port: number): Promise<void> {
