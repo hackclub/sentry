@@ -1,6 +1,6 @@
 import { eq, and } from 'drizzle-orm';
 import { db } from '../database/connection';
-import { whitelistedUsers, whitelistedChannels } from '../database/schema';
+import { whitelistedUsers, whitelistedChannels, allowedThreadsToSpeak } from '../database/schema';
 
 export class DatabaseService {
   // Whitelisted Users Management
@@ -89,6 +89,26 @@ export class DatabaseService {
     .where(eq(whitelistedChannels.isActive, true));
     
     return channels;
+  }
+
+  // Allowed Threads To Speak Management
+  async addAllowedThreadToSpeak(threadTs: string, channelId: string): Promise<void> {
+    await db.insert(allowedThreadsToSpeak).values({
+      threadTs,
+      channelId,
+    }).onConflictDoNothing();
+  }
+
+  async isThreadAllowedToSpeak(threadTs: string, channelId: string): Promise<boolean> {
+    const result = await db.select()
+      .from(allowedThreadsToSpeak)
+      .where(and(
+        eq(allowedThreadsToSpeak.threadTs, threadTs),
+        eq(allowedThreadsToSpeak.channelId, channelId)
+      ))
+      .limit(1);
+    
+    return result.length > 0;
   }
 
 }

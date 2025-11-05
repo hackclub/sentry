@@ -1,61 +1,92 @@
-display_information:
-  name: flavorguard
-features:
-  bot_user:
-    display_name: flavorguard
-    always_online: false
-  shortcuts:
-    - name: Whitelist thread
-      type: message
-      callback_id: whitelist_thread
-      description: open the floodgates
-  slash_commands:
-    - command: /add-user
-      description: a
-      should_escape: false
-    - command: /remove-user
-      description: b
-      should_escape: false
-    - command: /add-channel
-      description: c
-      should_escape: false
-    - command: /remove-channel
-      description: d
-      should_escape: false
-    - command: /list-whitelist
-      description: e
-      should_escape: false
-    - command: /whitelist-me
-      description: f
-      should_escape: false
-    - command: /queue-status
-      description: g
-      should_escape: false
-oauth_config:
-  scopes:
-    user:
-      - chat:write
-      - channels:write
-      - groups:write
-      - im:write
-      - mpim:write
-    bot:
-      - channels:history
-      - groups:history
-      - im:history
-      - mpim:history
-      - users:read
-      - channels:read
-      - commands
-settings:
-  event_subscriptions:
-    bot_events:
-      - message.channels
-      - message.groups
-      - message.im
-      - message.mpim
-  interactivity:
-    is_enabled: true
-  org_deploy_enabled: false
-  socket_mode_enabled: true
-  token_rotation_enabled: false
+{
+    "display_information": {
+        "name": "flavorguard"
+    },
+    "features": {
+        "bot_user": {
+            "display_name": "flavorguard",
+            "always_online": false
+        },
+        "shortcuts": [
+            {
+                "name": "Whitelist thread",
+                "type": "message",
+                "callback_id": "whitelist_thread",
+                "description": "open the floodgates"
+            }
+        ],
+        "slash_commands": [
+            {
+                "command": "/add-user",
+                "description": "a",
+                "should_escape": false
+            },
+            {
+                "command": "/remove-user",
+                "description": "b",
+                "should_escape": false
+            },
+            {
+                "command": "/add-channel",
+                "description": "c",
+                "should_escape": false
+            },
+            {
+                "command": "/remove-channel",
+                "description": "d",
+                "should_escape": false
+            },
+            {
+                "command": "/list-whitelist",
+                "description": "e",
+                "should_escape": false
+            },
+            {
+                "command": "/whitelist-me",
+                "description": "f",
+                "should_escape": false
+            },
+            {
+                "command": "/queue-status",
+                "description": "g",
+                "should_escape": false
+            }
+        ]
+    },
+    "oauth_config": {
+        "scopes": {
+            "user": [
+                "chat:write",
+                "channels:write",
+                "groups:write",
+                "im:write",
+                "mpim:write"
+            ],
+            "bot": [
+                "channels:history",
+                "groups:history",
+                "im:history",
+                "mpim:history",
+                "users:read",
+                "channels:read",
+                "commands"
+            ]
+        }
+    },
+    "settings": {
+        "event_subscriptions": {
+            "bot_events": [
+                "message.channels",
+                "message.groups",
+                "message.im",
+                "message.mpim"
+            ]
+        },
+        "interactivity": {
+            "is_enabled": true
+        },
+        "org_deploy_enabled": false,
+        "socket_mode_enabled": true,
+        "token_rotation_enabled": false
+    }
+}
